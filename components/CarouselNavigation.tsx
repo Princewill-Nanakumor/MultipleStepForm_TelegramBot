@@ -32,9 +32,9 @@ export default function CarouselNavigation({
           <button
             key={index}
             onClick={() => onSlideChange(index)}
-            className={`rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] ${
+            className={`rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-(--accent-primary) ${
               index === activeSlide
-                ? "h-1.5 w-6 bg-[var(--accent-primary)] sm:h-2 sm:w-8"
+                ? "h-1.5 w-6 bg-(--accent-primary) sm:h-2 sm:w-8"
                 : "h-1.5 w-1.5 bg-white/30 hover:bg-white/50 sm:h-2 sm:w-2"
             }`}
             aria-label={`Go to slide ${index + 1}`}

@@ -8,7 +8,7 @@ export const SLIDES: Slide[] = [
     title: (
       <>
         The newsletter for{" "}
-        <span className="bg-linear-to-br from-[var(--accent-primary)] to-[var(--accent-tertiary)] bg-clip-text text-transparent">
+        <span className="bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) bg-clip-text text-transparent">
           AI Builders
         </span>
       </>
@@ -24,7 +24,7 @@ export const SLIDES: Slide[] = [
     title: (
       <>
         What is{" "}
-        <span className="bg-linear-to-br from-[var(--accent-primary)] to-[var(--accent-tertiary)] bg-clip-text text-transparent">
+        <span className="bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) bg-clip-text text-transparent">
           cucina <span className="font-bold">labs</span>?
         </span>
       </>
