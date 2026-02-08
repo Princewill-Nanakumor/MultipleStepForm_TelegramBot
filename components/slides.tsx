@@ -1,16 +1,26 @@
 import type { Slide } from "@/types";
 
 export const KYIV_DISTRICTS = [
-  "Shevchenkivskyi",
-  "Pecherskyi",
-  "Darnytskyi",
-  "Solomianskyi",
-  "Obolonskyi",
-  "Svyatoshynskyi",
-  "Podilskyi",
-  "Desnianskyi",
-  "Dniprovskyi",
-  "Holosiivskyi",
+  "Holosiivskyi ",
+  "Darnytskyi ",
+  "Desnianskyi ",
+  "Dniprovskyi ",
+  "Obolonskyi ",
+  "Pecherskyi ",
+  "Podilskyi ",
+  "Sviatoshynskyi ",
+  "Solomianskyi ",
+  "Shevchenkivskyi ",
+  "Sofiivska Borshchahivka",
+  "Petropavlivska Borshchahivka",
+  "Chabany",
+  "Vyshneve",
+  "Boiarka",
+  "Hostomel",
+  "Irpin",
+  "Horenychi",
+  "Lyutizh",
+  "Borshchahivka",
 ] as const;
 
 export const SLIDES: Slide[] = [
@@ -34,8 +44,11 @@ export const SLIDES: Slide[] = [
         <br />
         <br />
         We are collecting information about electricity availability across Kyiv
-        districts. Your responses are anonymous unless you choose to share
-        contact details.
+        districts to gain a clearer understanding of the current situation. Your
+        participation will help us better understand the challenges residents
+        face and support efforts to advocate for improved services. This survey
+        will take only a few minutes to complete. Thank you for contributing to
+        this important initiative.
       </>
     ),
     formType: "intro",
@@ -68,8 +81,8 @@ export const SLIDES: Slide[] = [
     id: 4,
     tag: "QUESTION 4",
     tagDot: "#FFD700",
-    title: "Predictable Schedule?",
-    content: "Do outages follow a predictable schedule?",
+    title: "Timetable Schedule?",
+    content: "Do outages follow a timetable schedule?",
     formType: "schedule",
   },
   {
@@ -82,7 +95,7 @@ export const SLIDES: Slide[] = [
   },
   {
     id: 6,
-    tag: "OPTIONAL",
+    tag: "CONTACT",
     tagDot: "#0057B7",
     title: (
       <>

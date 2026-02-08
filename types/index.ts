@@ -24,6 +24,8 @@ export type ContactFormData = {
   phone: string;
 };
 
+export type FormErrors = Partial<Record<string, string>>;
+
 export type SlideContentProps = {
   slide: Slide;
   surveyData: SurveyFormData;
@@ -32,6 +34,7 @@ export type SlideContentProps = {
   onContactChange: (field: keyof ContactFormData, value: string) => void;
   onNext?: () => void;
   onSubmit?: () => void;
+  errors?: FormErrors;
 };
 
 export type CarouselNavigationProps = {
@@ -40,4 +43,6 @@ export type CarouselNavigationProps = {
   onPrev: () => void;
   onNext: () => void;
   onSlideChange: (index: number) => void;
+  showPrev?: boolean;
+  showNext?: boolean;
 };

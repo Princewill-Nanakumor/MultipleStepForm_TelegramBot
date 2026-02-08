@@ -7,6 +7,8 @@ const labelBase = "mb-1.5 block text-sm font-medium text-white/90";
 const btnBase =
   "inline-flex h-11 cursor-pointer items-center justify-center rounded-full bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) px-8 text-base font-semibold text-[#0d0d0d] shadow-[0_8px_16px_-6px_rgba(255,215,0,0.3)] transition-all duration-300 hover:brightness-110 active:brightness-95";
 
+const errorText = "mt-1 text-sm text-red-400";
+
 export default function SlideContent({
   slide,
   surveyData,
@@ -15,6 +17,7 @@ export default function SlideContent({
   onContactChange,
   onNext,
   onSubmit,
+  errors = {},
 }: SlideContentProps) {
   return (
     <div className="w-full">
@@ -63,7 +66,7 @@ export default function SlideContent({
             required
             value={surveyData.district}
             onChange={(e) => onSurveyChange("district", e.target.value)}
-            className={`${inputTertiaryFocus} mb-4 cursor-pointer`}
+            className={`${inputTertiaryFocus} ${errors.district ? "border-red-400" : ""} mb-4 cursor-pointer`}
           >
             <option value="">Select district</option>
             {KYIV_DISTRICTS.map((d) => (
@@ -72,6 +75,7 @@ export default function SlideContent({
               </option>
             ))}
           </select>
+          {errors.district && <p className={errorText}>{errors.district}</p>}
           <button type="submit" className={btnBase}>
             Continue
           </button>
@@ -113,6 +117,7 @@ export default function SlideContent({
               </label>
             ))}
           </div>
+          {errors.hoursPerDay && <p className={`${errorText} mb-4`}>{errors.hoursPerDay}</p>}
           <button type="submit" className={btnBase}>
             Continue
           </button>
@@ -144,6 +149,7 @@ export default function SlideContent({
               </label>
             ))}
           </div>
+          {errors.situationChange && <p className={`${errorText} mb-4`}>{errors.situationChange}</p>}
           <button type="submit" className={btnBase}>
             Continue
           </button>
@@ -159,9 +165,9 @@ export default function SlideContent({
         >
           <div className="mb-4 space-y-1">
             {[
-              "Yes, mostly predictable",
+              "Yes, mostly follows timetable",
               "Sometimes",
-              "No, completely unpredictable",
+              "No, no timetable",
             ].map((opt) => (
               <label
                 key={opt}
@@ -179,6 +185,7 @@ export default function SlideContent({
               </label>
             ))}
           </div>
+          {errors.predictableSchedule && <p className={`${errorText} mb-4`}>{errors.predictableSchedule}</p>}
           <button type="submit" className={btnBase}>
             Continue
           </button>
@@ -197,8 +204,9 @@ export default function SlideContent({
             value={surveyData.comments}
             onChange={(e) => onSurveyChange("comments", e.target.value)}
             rows={3}
-            className={`${inputTertiaryFocus} mb-4 resize-none`}
+            className={`${inputTertiaryFocus} ${errors.comments ? "border-red-400" : ""} mb-4 resize-none`}
           />
+          {errors.comments && <p className={`${errorText} mb-4`}>{errors.comments}</p>}
           <button type="submit" className={btnBase}>
             Continue
           </button>
@@ -214,45 +222,49 @@ export default function SlideContent({
         >
           <div className="mb-3 grid gap-3 sm:grid-cols-2">
             <div>
-              <label className={labelBase}>First name</label>
+              <label className={labelBase}>First name <span className="text-red-400">*</span></label>
               <input
                 type="text"
                 placeholder="First name"
                 value={contactData.firstName}
                 onChange={(e) => onContactChange("firstName", e.target.value)}
-                className={inputTertiaryFocus}
+                className={`${inputTertiaryFocus} ${errors.firstName ? "border-red-400" : ""}`}
               />
+              {errors.firstName && <p className={errorText}>{errors.firstName}</p>}
             </div>
             <div>
-              <label className={labelBase}>Last name</label>
+              <label className={labelBase}>Last name <span className="text-red-400">*</span></label>
               <input
                 type="text"
                 placeholder="Last name"
                 value={contactData.lastName}
                 onChange={(e) => onContactChange("lastName", e.target.value)}
-                className={inputTertiaryFocus}
+                className={`${inputTertiaryFocus} ${errors.lastName ? "border-red-400" : ""}`}
               />
+              {errors.lastName && <p className={errorText}>{errors.lastName}</p>}
             </div>
           </div>
           <div className="mb-3">
-            <label className={labelBase}>Email</label>
+            <label className={labelBase}>Email <span className="text-red-400">*</span></label>
             <input
               type="email"
               placeholder="Email"
               value={contactData.email}
               onChange={(e) => onContactChange("email", e.target.value)}
-              className={inputTertiaryFocus}
+              className={`${inputTertiaryFocus} ${errors.email ? "border-red-400" : ""}`}
             />
+            {errors.email && <p className={errorText}>{errors.email}</p>}
           </div>
           <div className="mb-4">
-            <label className={labelBase}>Phone</label>
+            <label className={labelBase}>Phone <span className="text-red-400">*</span></label>
             <input
               type="tel"
               placeholder="Phone"
               value={contactData.phone}
               onChange={(e) => onContactChange("phone", e.target.value)}
-              className={inputTertiaryFocus}
+              className={`${inputTertiaryFocus} ${errors.phone ? "border-red-400" : ""}`}
             />
+            {errors.phone && <p className={errorText}>{errors.phone}</p>}
           </div>
           <button type="submit" className={btnBase}>
             Submit
