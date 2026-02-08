@@ -15,7 +15,7 @@ export const initialContactData: ContactFormData = {
   phone: "",
 };
 
-export const FADE_DURATION = 500;
+export const FADE_DURATION = 800;
 
 export function flattenZodErrors(err: {
   flatten: () => { fieldErrors: Record<string, string[]> };

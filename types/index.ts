@@ -35,6 +35,7 @@ export type SlideContentProps = {
   onNext?: () => void;
   onSubmit?: () => void;
   errors?: FormErrors;
+  isSubmitting?: boolean;
 };
 
 export type CarouselNavigationProps = {

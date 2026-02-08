@@ -23,6 +23,7 @@ export default function ElectricitySurvey() {
     useState<ContactFormData>(initialContactData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const nextSlide = () => {
     setErrors({});
@@ -95,6 +96,7 @@ export default function ElectricitySurvey() {
       setErrors(flattenZodErrors(result.error));
       return;
     }
+    setIsSubmitting(true);
     try {
       const res = await fetch("/api/submit-survey", {
         method: "POST",
@@ -107,6 +109,8 @@ export default function ElectricitySurvey() {
       }
     } catch (err) {
       console.error("Failed to submit survey:", err);
+    } finally {
+      setIsSubmitting(false);
     }
     setIsSubmitted(true);
   };
@@ -181,6 +185,7 @@ export default function ElectricitySurvey() {
                     }
                     onSubmit={slide.id === 6 ? handleSubmit : undefined}
                     errors={errors}
+                    isSubmitting={isSubmitting}
                   />
                 </div>
               ))}
