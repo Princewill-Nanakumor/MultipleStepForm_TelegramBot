@@ -1,42 +1,97 @@
 import type { Slide } from "@/types";
 
+export const KYIV_DISTRICTS = [
+  "Shevchenkivskyi",
+  "Pecherskyi",
+  "Darnytskyi",
+  "Solomianskyi",
+  "Obolonskyi",
+  "Svyatoshynskyi",
+  "Podilskyi",
+  "Desnianskyi",
+  "Dniprovskyi",
+  "Holosiivskyi",
+] as const;
+
 export const SLIDES: Slide[] = [
   {
     id: 0,
-    tag: "AI PRODUCT BRIEFING",
-    tagDot: "#40E0D0",
+    tag: "ELECTRICITY SURVEY",
+    tagDot: "#FFD700",
     title: (
       <>
-        The newsletter for{" "}
-        <span className="bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) bg-clip-text text-transparent">
-          AI Builders
-        </span>
-      </>
-    ),
-    content:
-      "Fresh recipes, emerging trends, and the latest developments in artificial intelligence — served straight to your inbox.",
-    form: true,
-  },
-  {
-    id: 1,
-    tag: "ABOUT US",
-    tagDot: "#50C8F6",
-    title: (
-      <>
-        What is{" "}
-        <span className="bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) bg-clip-text text-transparent">
-          cucina <span className="font-bold">labs</span>?
+        Light{" "}
+        <span className="bg-linear-to-br from-(--accent-primary) via-white/90 to-(--accent-tertiary) bg-clip-text text-transparent">
+          Availability Survey
         </span>
       </>
     ),
     content: (
       <>
-        <span className="text-white">cucina <span className="font-bold">labs</span></span>{" "}
-        is a test kitchen for AI builders. We experiment with AI tools and explore emerging trends. Daily insights are on the menu with recipes coming soon.
-        <br /><br />
-        <span className="text-white/90 font-medium">Let&apos;s cook.</span>
+        <span className="font-medium text-white">
+          Electricity Availability Survey – Kyiv
+        </span>
+        <br />
+        <br />
+        We are collecting information about electricity availability across Kyiv
+        districts. Your responses are anonymous unless you choose to share
+        contact details.
       </>
     ),
-    cta: "Let's cook.",
+    formType: "intro",
+  },
+  {
+    id: 1,
+    tag: "QUESTION 1",
+    tagDot: "#FFD700",
+    title: "Which district?",
+    content: "Select your district from the list below.",
+    formType: "district",
+  },
+  {
+    id: 2,
+    tag: "QUESTION 2",
+    tagDot: "#FFD700",
+    title: "Hours of Electricity",
+    content: "On average, how many hours per day do you have electricity?",
+    formType: "hours",
+  },
+  {
+    id: 3,
+    tag: "QUESTION 3",
+    tagDot: "#FFD700",
+    title: "Situation Change",
+    content: "Has the situation changed in the past 2 weeks?",
+    formType: "situation",
+  },
+  {
+    id: 4,
+    tag: "QUESTION 4",
+    tagDot: "#FFD700",
+    title: "Predictable Schedule?",
+    content: "Do outages follow a predictable schedule?",
+    formType: "schedule",
+  },
+  {
+    id: 5,
+    tag: "OPTIONAL",
+    tagDot: "#0057B7",
+    title: "Additional Comments",
+    content: "Share any details about outages in your area.",
+    formType: "comments",
+  },
+  {
+    id: 6,
+    tag: "OPTIONAL",
+    tagDot: "#0057B7",
+    title: (
+      <>
+        Stay in Touch{" "}
+        <span className="bg-linear-to-br from-(--accent-primary) via-white/90 to-(--accent-tertiary) bg-clip-text text-transparent"></span>
+      </>
+    ),
+    content:
+      "If you'd like updates about this survey or related reports, please leave your contact details.",
+    formType: "contact",
   },
 ];

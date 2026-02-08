@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Cucina Labs",
-  description: "A test kitchen for AI builders",
+  title: "Electricity Availability Survey – Kyiv",
+  description: "Light Availability Survey – Collecting information about electricity availability across Kyiv districts",
 };
 
 export default function RootLayout({

@@ -4,10 +4,10 @@ export default function BackgroundImage() {
   return (
     <>
       <Image
-        src="/iuliu-illes-JubMDAhWdo8-unsplash.jpg"
+        src="/marjan-blan-UDdkJlfn7cU-unsplash.jpg"
         alt="Background"
         fill
-        className="object-cover grayscale brightness-75"
+        className="object-cover  brightness-90"
         priority
         sizes="100vw"
       />

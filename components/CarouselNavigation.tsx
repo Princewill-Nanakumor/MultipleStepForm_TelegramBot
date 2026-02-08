@@ -8,10 +8,10 @@ export default function CarouselNavigation({
   onSlideChange,
 }: CarouselNavigationProps) {
   return (
-    <div className="relative z-10 mt-6 flex w-full items-center justify-between sm:mt-8">
+    <div className="relative z-10 flex w-full items-center justify-between">
       <button
         onClick={onPrev}
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 hover:-translate-x-0.5 hover:bg-white/20 sm:h-10 sm:w-10"
+        className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 hover:-translate-x-0.5 hover:bg-white/20 sm:h-10 sm:w-10"
         aria-label="Previous slide"
       >
         <svg
@@ -32,7 +32,7 @@ export default function CarouselNavigation({
           <button
             key={index}
             onClick={() => onSlideChange(index)}
-            className={`rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-(--accent-primary) ${
+            className={`cursor-pointer rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-(--accent-primary) ${
               index === activeSlide
                 ? "h-1.5 w-6 bg-(--accent-primary) sm:h-2 sm:w-8"
                 : "h-1.5 w-1.5 bg-white/30 hover:bg-white/50 sm:h-2 sm:w-2"
@@ -44,7 +44,7 @@ export default function CarouselNavigation({
 
       <button
         onClick={onNext}
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 hover:translate-x-0.5 hover:bg-white/20 sm:h-10 sm:w-10"
+        className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 hover:translate-x-0.5 hover:bg-white/20 sm:h-10 sm:w-10"
         aria-label="Next slide"
       >
         <svg

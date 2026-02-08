@@ -1,65 +1,264 @@
 import type { SlideContentProps } from "@/types";
+import { KYIV_DISTRICTS } from "./slides";
+
+const inputTertiaryFocus =
+  "w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-base text-white placeholder:text-white/40 transition-all duration-300 focus:border-(--accent-tertiary) focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent-tertiary)";
+const labelBase = "mb-1.5 block text-sm font-medium text-white/90";
+const btnBase =
+  "inline-flex h-11 cursor-pointer items-center justify-center rounded-full bg-linear-to-br from-(--accent-primary) to-(--accent-tertiary) px-8 text-base font-semibold text-[#0d0d0d] shadow-[0_8px_16px_-6px_rgba(255,215,0,0.3)] transition-all duration-300 hover:brightness-110 active:brightness-95";
 
 export default function SlideContent({
   slide,
-  email,
-  onEmailChange,
+  surveyData,
+  contactData,
+  onSurveyChange,
+  onContactChange,
+  onNext,
+  onSubmit,
 }: SlideContentProps) {
   return (
     <div className="w-full">
-      {/* Tag - matches reference styling */}
-      <div className="mb-4 flex items-center gap-2 sm:mb-6">
-        <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(60,53,242,0.4)] bg-[linear-gradient(135deg,rgba(60,53,242,0.18),rgba(74,95,217,0.18))] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-(--accent-primary) sm:px-4 sm:py-2 sm:text-xs">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-(--accent-primary) sm:h-2 sm:w-2" />
+      <div className="mb-2 flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(0,87,183,0.5)] bg-[linear-gradient(135deg,rgba(0,87,183,0.2),rgba(255,255,255,0.08))] px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-white/95">
+          <span className="h-1 w-1 animate-pulse rounded-full bg-(--accent-tertiary)" />
           {slide.tag}
         </span>
       </div>
 
-      {/* Title - Playfair Display serif */}
       <h1
-        className="mb-4 whitespace-nowrap font-serif text-3xl font-normal leading-[1.15] tracking-[-0.03em] text-white pt-1 sm:mb-6 sm:text-4xl md:text-5xl "
+        className="mb-4 font-serif text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl"
         style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
       >
         {slide.title}
       </h1>
 
-      {/* Content */}
-      <div className="mb-6 max-w-xl text-sm leading-relaxed text-white/75 sm:mb-8 sm:text-base md:mb-10 md:text-lg lg:mb-12 lg:text-xl">
+      <div className="mb-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
         {slide.content}
       </div>
 
-      {/* Form or content-only (CTA embedded in content for About Us) */}
-      {slide.form ? (
-        <form className="max-w-md" onSubmit={(e) => e.preventDefault()}>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="relative flex-1">
+      {slide.formType === "intro" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <button type="submit" className={btnBase}>
+            Get Started
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "district" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <label className={labelBase}>
+            District <span className="text-red-400">*</span>
+          </label>
+          <select
+            required
+            value={surveyData.district}
+            onChange={(e) => onSurveyChange("district", e.target.value)}
+            className={`${inputTertiaryFocus} mb-4 cursor-pointer`}
+          >
+            <option value="">Select district</option>
+            {KYIV_DISTRICTS.map((d) => (
+              <option key={d} value={d} className="bg-[#1a1a1a] text-white">
+                {d}
+              </option>
+            ))}
+          </select>
+          <button type="submit" className={btnBase}>
+            Continue
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "hours" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <label className={`${labelBase} mb-2 block`}>
+            Hours per day <span className="text-red-400">*</span>
+          </label>
+          <div className="mb-4 grid grid-cols-2 gap-x-4 gap-y-1">
+            {[
+              "0–2 hours",
+              "3–6 hours",
+              "7–12 hours",
+              "13–18 hours",
+              "19–24 hours",
+            ].map((opt) => (
+              <label
+                key={opt}
+                className="flex cursor-pointer items-center gap-3"
+              >
+                <input
+                  type="radio"
+                  name="hoursPerDay"
+                  value={opt}
+                  checked={surveyData.hoursPerDay === opt}
+                  onChange={() => onSurveyChange("hoursPerDay", opt)}
+                  className="h-4 w-4 accent-(--accent-primary)"
+                  required
+                />
+                <span className="text-base text-white/90">{opt}</span>
+              </label>
+            ))}
+          </div>
+          <button type="submit" className={btnBase}>
+            Continue
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "situation" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <div className="mb-4 space-y-1">
+            {["Improved", "Stayed the same", "Got worse"].map((opt) => (
+              <label
+                key={opt}
+                className="flex cursor-pointer items-center gap-3"
+              >
+                <input
+                  type="radio"
+                  name="situationChange"
+                  value={opt}
+                  checked={surveyData.situationChange === opt}
+                  onChange={() => onSurveyChange("situationChange", opt)}
+                  className="h-4 w-4 accent-(--accent-primary)"
+                />
+                <span className="text-base text-white/90">{opt}</span>
+              </label>
+            ))}
+          </div>
+          <button type="submit" className={btnBase}>
+            Continue
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "schedule" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <div className="mb-4 space-y-1">
+            {[
+              "Yes, mostly predictable",
+              "Sometimes",
+              "No, completely unpredictable",
+            ].map((opt) => (
+              <label
+                key={opt}
+                className="flex cursor-pointer items-center gap-3"
+              >
+                <input
+                  type="radio"
+                  name="predictableSchedule"
+                  value={opt}
+                  checked={surveyData.predictableSchedule === opt}
+                  onChange={() => onSurveyChange("predictableSchedule", opt)}
+                  className="h-4 w-4 accent-(--accent-primary)"
+                />
+                <span className="text-base text-white/90">{opt}</span>
+              </label>
+            ))}
+          </div>
+          <button type="submit" className={btnBase}>
+            Continue
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "comments" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onNext?.();
+          }}
+        >
+          <textarea
+            placeholder="Please share any details about outages in your area."
+            value={surveyData.comments}
+            onChange={(e) => onSurveyChange("comments", e.target.value)}
+            rows={3}
+            className={`${inputTertiaryFocus} mb-4 resize-none`}
+          />
+          <button type="submit" className={btnBase}>
+            Continue
+          </button>
+        </form>
+      )}
+
+      {slide.formType === "contact" && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit?.();
+          }}
+        >
+          <div className="mb-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className={labelBase}>First name</label>
               <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => onEmailChange(e.target.value)}
-                className="h-12 w-full rounded-full border border-white/20 bg-white/5 px-4 text-white placeholder:text-white/40 transition-all duration-300 focus:border-(--accent-primary) focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-(--accent-primary) sm:h-14 sm:px-6 sm:text-base"
+                type="text"
+                placeholder="First name"
+                value={contactData.firstName}
+                onChange={(e) => onContactChange("firstName", e.target.value)}
+                className={inputTertiaryFocus}
               />
             </div>
-            <button
-              type="submit"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-linear-to-br from-(--accent-primary) to-[#7ce8b5] px-6 font-semibold text-[#0d0d0d] shadow-[0_12px_24px_-8px_rgba(155,242,202,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_-10px_rgba(155,242,202,0.5)] hover:brightness-110 active:translate-y-0 active:brightness-95 sm:h-14 sm:px-8 sm:text-base"
-            >
-              Sign Up
-            </button>
+            <div>
+              <label className={labelBase}>Last name</label>
+              <input
+                type="text"
+                placeholder="Last name"
+                value={contactData.lastName}
+                onChange={(e) => onContactChange("lastName", e.target.value)}
+                className={inputTertiaryFocus}
+              />
+            </div>
           </div>
-          <p className="mt-4 whitespace-nowrap text-xs text-white/55 sm:mt-6 sm:text-sm">
-            Join the kitchen. By clicking &apos;Sign Up&apos; you agree to our{" "}
-            <a
-              href="/privacy"
-              className="text-(--accent-primary) hover:underline"
-            >
-              privacy policy
-            </a>
-            .
-          </p>
+          <div className="mb-3">
+            <label className={labelBase}>Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              value={contactData.email}
+              onChange={(e) => onContactChange("email", e.target.value)}
+              className={inputTertiaryFocus}
+            />
+          </div>
+          <div className="mb-4">
+            <label className={labelBase}>Phone</label>
+            <input
+              type="tel"
+              placeholder="Phone"
+              value={contactData.phone}
+              onChange={(e) => onContactChange("phone", e.target.value)}
+              className={inputTertiaryFocus}
+            />
+          </div>
+          <button type="submit" className={btnBase}>
+            Submit
+          </button>
         </form>
-      ) : null}
+      )}
     </div>
   );
 }

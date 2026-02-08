@@ -6,14 +6,32 @@ export type Slide = {
   tagDot: string;
   title: ReactNode;
   content: ReactNode;
-  cta?: string;
-  form?: boolean;
+  formType?: "intro" | "district" | "hours" | "situation" | "schedule" | "comments" | "contact";
+};
+
+export type SurveyFormData = {
+  district: string;
+  hoursPerDay: string;
+  situationChange: string;
+  predictableSchedule: string;
+  comments: string;
+};
+
+export type ContactFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
 };
 
 export type SlideContentProps = {
   slide: Slide;
-  email: string;
-  onEmailChange: (value: string) => void;
+  surveyData: SurveyFormData;
+  contactData: ContactFormData;
+  onSurveyChange: (field: keyof SurveyFormData, value: string) => void;
+  onContactChange: (field: keyof ContactFormData, value: string) => void;
+  onNext?: () => void;
+  onSubmit?: () => void;
 };
 
 export type CarouselNavigationProps = {
