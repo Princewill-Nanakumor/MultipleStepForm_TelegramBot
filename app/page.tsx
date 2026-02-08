@@ -1,5 +1,5 @@
-import CucinaCarousel from "@/components/CucinaCarousel";
+import ElectricitySurvey from "@/components/ElectricitySurvey";
 
 export default function Home() {
-  return <CucinaCarousel />;
+  return <ElectricitySurvey />;
 }

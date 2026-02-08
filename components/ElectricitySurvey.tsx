@@ -15,7 +15,7 @@ import SlideContent from "./SlideContent";
 import ThankYouView from "./ThankYouView";
 import SurveyCard from "./SurveyCard";
 
-export default function CucinaCarousel() {
+export default function ElectricitySurvey() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [surveyData, setSurveyData] =
     useState<SurveyFormData>(initialSurveyData);
