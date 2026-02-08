@@ -54,6 +54,7 @@ export default function SlideContent({
 
       {slide.formType === "district" && (
         <form
+          noValidate
           onSubmit={(e) => {
             e.preventDefault();
             onNext?.();
@@ -63,7 +64,6 @@ export default function SlideContent({
             District <span className="text-red-400">*</span>
           </label>
           <select
-            required
             value={surveyData.district}
             onChange={(e) => onSurveyChange("district", e.target.value)}
             className={`${inputTertiaryFocus} ${errors.district ? "border-red-400" : ""} mb-4 cursor-pointer`}
@@ -84,6 +84,7 @@ export default function SlideContent({
 
       {slide.formType === "hours" && (
         <form
+          noValidate
           onSubmit={(e) => {
             e.preventDefault();
             onNext?.();
@@ -111,7 +112,6 @@ export default function SlideContent({
                   checked={surveyData.hoursPerDay === opt}
                   onChange={() => onSurveyChange("hoursPerDay", opt)}
                   className="h-4 w-4 accent-(--accent-primary)"
-                  required
                 />
                 <span className="text-base text-white/90">{opt}</span>
               </label>
