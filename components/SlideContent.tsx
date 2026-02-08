@@ -6,7 +6,7 @@ export default function SlideContent({
   onEmailChange,
 }: SlideContentProps) {
   return (
-    <div className="w-full min-w-full shrink-0">
+    <div className="w-full">
       {/* Tag - matches reference styling */}
       <div className="mb-4 flex items-center gap-2 sm:mb-6">
         <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(60,53,242,0.4)] bg-[linear-gradient(135deg,rgba(60,53,242,0.18),rgba(74,95,217,0.18))] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--accent-primary)] sm:px-4 sm:py-2 sm:text-xs">

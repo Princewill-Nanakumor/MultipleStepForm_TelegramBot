@@ -9,6 +9,7 @@ import CarouselNavigation from "./CarouselNavigation";
 export default function CucinaCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [email, setEmail] = useState("");
+  const FADE_DURATION = 800;
 
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % SLIDES.length);
@@ -38,21 +39,25 @@ export default function CucinaCarousel() {
             aria-hidden
           />
 
-          {/* Slide track */}
+          {/* Slide track - fade transition */}
           <div className="relative z-10 min-h-[350px] overflow-hidden sm:min-h-[380px] md:min-h-[400px]">
-            <div
-              className="flex transition-transform duration-300 ease-out"
-              style={{ transform: `translateX(-${activeSlide * 100}%)` }}
-            >
-              {SLIDES.map((slide) => (
+            {SLIDES.map((slide) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity ease-in-out ${
+                  slide.id === activeSlide
+                    ? "opacity-100"
+                    : "pointer-events-none opacity-0"
+                }`}
+                style={{ transitionDuration: `${FADE_DURATION}ms` }}
+              >
                 <SlideContent
-                  key={slide.id}
                   slide={slide}
                   email={email}
                   onEmailChange={setEmail}
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
           <CarouselNavigation
